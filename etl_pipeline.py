@@ -1,64 +1,71 @@
 import pandas as pd
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
 
-# 1. Extract - Load Data
-def load_data(file_path):
+def extract(file_path):
+    """Extract data from CSV file"""
     data = pd.read_csv(file_path)
-    print("Data loaded successfully.")
+    print("Data extracted")
     return data
 
-# 2. Transform - Preprocessing pipeline
-def preprocess_data(data):
-    # Separate features by type
-    numeric_features = data.select_dtypes(include=['int64', 'float64']).columns.tolist()
-    categorical_features = data.select_dtypes(include=['object']).columns.tolist()
+def transform(data):
+    """Preprocess and transform the data"""
 
-    # Define transformers
-    numeric_transformer = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy='mean')),    # Fill missing numeric values with mean
-        ('scaler', StandardScaler())                     # Scale numeric features
+    # Identify categorical and numerical columns
+    categorical_cols = data.select_dtypes(include=['object', 'category']).columns.tolist()
+    numerical_cols = data.select_dtypes(include=['int64', 'float64']).columns.tolist()
+
+    print(f"Categorical columns: {categorical_cols}")
+    print(f"Numerical columns: {numerical_cols}")
+
+    # Preprocessing for numerical data: just impute missing values (mean)
+    numerical_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='mean'))
     ])
 
+    # Preprocessing for categorical data: impute missing with most frequent, then one-hot encode
     categorical_transformer = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy='most_frequent')),  # Fill missing categorical values with mode
-        ('onehot', OneHotEncoder(handle_unknown='ignore'))     # One-hot encode categorical features
+        ('imputer', SimpleImputer(strategy='most_frequent')),
+        ('onehot', OneHotEncoder(handle_unknown='ignore'))
     ])
 
-    # Combine transformers into a ColumnTransformer
+    # Combine preprocessing steps
     preprocessor = ColumnTransformer(
         transformers=[
-            ('num', numeric_transformer, numeric_features),
-            ('cat', categorical_transformer, categorical_features)
+            ('num', numerical_transformer, numerical_cols),
+            ('cat', categorical_transformer, categorical_cols)
         ])
 
-    # Fit and transform the data
-    transformed_data = preprocessor.fit_transform(data)
+    # Fit and transform data
+    data_processed = preprocessor.fit_transform(data)
 
-    # Convert the result back to a DataFrame with proper column names
-    # Extract feature names after OneHotEncoding
-    cat_cols = preprocessor.named_transformers_['cat']['onehot'].get_feature_names_out(categorical_features)
-    all_cols = numeric_features + list(cat_cols)
+    print("Data transformed")
 
-    df_transformed = pd.DataFrame(transformed_data.toarray() if hasattr(transformed_data, "toarray") else transformed_data,
-                                  columns=all_cols)
+    # Get feature names
+    cat_features = preprocessor.named_transformers_['cat']['onehot'].get_feature_names_out(categorical_cols)
+    all_features = numerical_cols + list(cat_features)
 
-    print("Data preprocessing complete.")
-    return df_transformed
+    # Convert to DataFrame
+    data_processed_df = pd.DataFrame(
+        data_processed.toarray() if hasattr(data_processed, "toarray") else data_processed,
+        columns=all_features
+    )
 
-# 3. Load - Save the processed data
-def save_data(data, output_path):
-    data.to_csv(output_path, index=False)
-    print(f"Data saved to {output_path}")
+    return data_processed_df
 
-# Main pipeline execution
+def load(data, output_file):
+    """Load the processed data to CSV"""
+    data.to_csv(output_file, index=False)
+    print(f"Data loaded to {output_file}")
+
+def etl_pipeline(input_file, output_file):
+    data = extract(input_file)
+    processed_data = transform(data)
+    load(processed_data, output_file)
+
 if __name__ == "__main__":
-    input_file = 'input_data.csv'     # Replace with your input CSV path
-    output_file = 'processed_data.csv'  # Replace with your desired output path
-
-    # Run ETL steps
-    raw_data = load_data(input_file)
-    processed_data = preprocess_data(raw_data)
-    save_data(processed_data, output_file)
+    input_file = "input_data.csv"  # Your input CSV filename
+    output_file = "processed_data.csv"  # Output CSV filename
+    etl_pipeline(input_file, output_file)
