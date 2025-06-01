@@ -1,18 +1,26 @@
-index,Recived Amount,Unnamed: 1,Expance,Unnamed: 3
-0,Particular,Amount,Particular,Amount
-1,06-19-22,1000,Large Bag,380
-2,06-20-22,1500,"Stationary(Soft Pin, Paper pin for Dupatta, Fevikwick)",170
-3,06-22-22,500,OLA,839
-4,06-23-22,2000,Auto Rent,520
-5,,,TT Fine,500
-6,,,Bhushan Hotel,2506
-7,,,Food,1290
-8,,,Expomart Labour Charge,200
-9,,,Choclate,400
-10,,,Bhushan Cash,800
-11,,,Delhi Hotel Rest Room,120
-12,,,Water Bottel,70
-13,,,Cooli,300
-14,,,,8095
-15,,,Pending Amount,-3095
-16,Total,5000,,5000
+OrderID,CustomerName,Product,Category,Quantity,Price,OrderDate,Country
+1001,John Doe,Wireless Mouse,Electronics,2,25.99,2024-05-10,USA
+1002,Jane Smith,Office Chair,Furniture,,89.50,2024-05-12,Canada
+1003,Michael Brown,,Electronics,1,45.00,2024-05-15,USA
+1004,Emily Davis,Coffee Maker,Appliances,1,,2024-05-16,UK
+1005,,Standing Desk,Furniture,1,250.00,2024-05-20,USA
+1006,Alice Johnson,Monitor 24 inch,Electronics,2,180.00,,Canada
+1007,David Lee,Noise Cancelling Headphones,,1,150.00,2024-05-22,USA
+1008,Sarah King,Electric Kettle,Appliances,1,60.00,2024-05-23,
+1009,James White,USB-C Hub,Electronics,3,35.00,2024-05-25,USA
+1010,Maria Garcia,Bookshelf,Furniture,1,75.00,2024-05-26,Canada
+1011,Linda Thompson,Laptop,Electronics,1,850.00,2024-05-27,USA
+1012,Robert Martin,Desk Lamp,Furniture,2,,2024-05-28,UK
+1013,,Wireless Keyboard,Electronics,1,40.00,2024-05-29,Canada
+1014,Jessica Moore,Air Purifier,Appliances,,120.00,2024-05-30,USA
+1015,William Clark,Monitor 27 inch,Electronics,1,250.00,2024-06-01,Canada
+1016,Barbara Lewis,,Furniture,1,150.00,2024-06-02,UK
+1017,Steven Hall,Smart Speaker,Electronics,,80.00,,USA
+1018,Elizabeth Allen,Bookshelf,Furniture,1,75.00,2024-06-04,Canada
+1019,Paul Young,Coffee Maker,Appliances,1,120.00,2024-06-05,UK
+1020,Laura Hernandez,Office Chair,Furniture,1,89.50,2024-06-06,USA
+1021,Kevin Scott,,Electronics,2,200.00,2024-06-07,Canada
+1022,Angela Adams,USB-C Hub,Electronics,3,,2024-06-08,USA
+1023,Mark Baker,Standing Desk,Furniture,1,250.00,2024-06-09,
+1024,Patricia Wright,Wireless Mouse,Electronics,1,25.99,2024-06-10,USA
+1025,,Noise Cancelling Headphones,Electronics,1,150.00,2024-06-11,Canada
