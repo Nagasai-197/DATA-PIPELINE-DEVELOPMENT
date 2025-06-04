@@ -1,4 +1,13 @@
-# data-pipeline-etl
+DATA PIPELINE DEVELOPMENT
+
+COMPANY: CODTECH IT SOLUTIONS
+NAME: BATHULA SRI HEMANTH NAGA SAI
+INTERN ID: :CT06DK242
+DOMAIN: DATA SCIENCE
+DURATION: 6 WEEKS
+MENTOR: NEELA SANTOSH
+
+
 ## 📊 ETL Pipeline Project
 
 This project implements an **ETL (Extract, Transform, Load)** pipeline using Python, `pandas`, and `scikit-learn`. It automates the process of reading a dataset, cleaning and transforming the data, and preparing it for further analysis or machine learning workflows.
